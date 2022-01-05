@@ -7,7 +7,7 @@ export const HeaderContainer = styled.header`
   box-shadow: 0px 2px 25px rgba(169, 169, 169, 0.2);
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-left:7.8125%;
   padding-right:7.8125%;
 `;
@@ -19,7 +19,7 @@ export const LogoImg = styled.img`
 `;
 
 export const Title = styled.h1`
-  font-family: Poppins;
+  /* font-family: Poppins; */
   font-style: SemiBold;
   font-size: 38px;
   line-height: 78px;

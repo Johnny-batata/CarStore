@@ -36,7 +36,7 @@ export const FormSection = styled.section`
 `;
 
 export const Title = styled.h1`
-  font-family: Poppins;
+  /* font-family: Poppins; */
   font-style: SemiBold;
   font-size: 38px;
   line-height: 78px;
