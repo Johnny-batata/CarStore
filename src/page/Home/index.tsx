@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  Wrapper, Container, Title, SubTitle, ContentSectionWrapper, ContentSection, ContentSectionImg,
-  ContentSectionTitle, ContentSectionSubTitle, ContentSectionFooter,
+  Wrapper, Container, Title, SubTitle,
 } from './styles';
 import Header from '../GeneralComponents/Header';
 import ImageOne from '../../assets/Home/car1.png';
 import ImageTwo from '../../assets/Home/car2.png';
 import ImageThree from '../../assets/Home/notACar.png';
+
+import HomeSections from './components/HomeSections';
 
 const Home: React.FC = () => (
   <Container>
@@ -14,18 +15,7 @@ const Home: React.FC = () => (
     <Wrapper>
       <Title>Bem-vindo, Carlos</Title>
       <SubTitle>Menu</SubTitle>
-      <ContentSection>
-        <ContentSectionWrapper>
-          <ContentSectionTitle>
-            Veículos reservados e vendidos
-          </ContentSectionTitle>
-          <ContentSectionSubTitle>
-            Veículos reservados e vendidos por você
-          </ContentSectionSubTitle>
-          <ContentSectionFooter>147 Veículos</ContentSectionFooter>
-        </ContentSectionWrapper>
-        <ContentSectionImg src={ImageOne} alt="image-one" />
-      </ContentSection>
+      <HomeSections />
     </Wrapper>
   </Container>
 );
