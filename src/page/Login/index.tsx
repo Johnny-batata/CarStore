@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Container, Wrapper, PanelForm, ColumnImg, ContentForm, Title, LogoImg, LogoSection, FormSection,
+  Wrapper, PanelForm, ColumnImg, ContentForm, Title, LogoImg, LogoSection, FormSection,
   TitleContent, SubTitleContent, SubTitleSection, Label, Input, ForgotPasswordContainer, Button,
+  Container,
 } from './styles';
 import Car from '../../assets/Login/Login-car.png';
 
