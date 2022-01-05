@@ -1,16 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { Route } from 'react-router-dom';
 import Login from './page/Login';
+import { Container } from './page/Login/styles';
 
-
-function App() {
-  return (
-    <div>
-      <Route exact path="/" component={ Login } />
-    </div>
-  );
-}
+const App: React.FC = () => (
+  <Container>
+    <Route exact path="/" component={Login} />
+  </Container>
+);
 
 export default App;
