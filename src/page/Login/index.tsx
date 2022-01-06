@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Wrapper, PanelForm, ColumnImg, ContentForm, Title, LogoImg, LogoSection, FormSection,
-  TitleContent, SubTitleContent, SubTitleSection, Label, Input, ForgotPasswordContainer, Button,
-  Container,
+  Wrapper, PanelForm, ColumnImg, Title, LogoImg, LogoSection, Container,
 } from './styles';
 import Car from '../../assets/Login/Login-car.png';
+
+import LoginForm from './components/LoginForm/index';
 
 const Login: React.FC = () => {
   console.log('sapo');
@@ -16,39 +16,7 @@ const Login: React.FC = () => {
             <LogoImg src="https://avatars.githubusercontent.com/u/63678630?s=200&v=4" alt="sapo" />
             <Title>AutoLuby</Title>
           </LogoSection>
-          <FormSection>
-            <div>
-              <TitleContent>
-                Bem-vindo à AutoLuby
-              </TitleContent>
-              <SubTitleSection>
-                <SubTitleContent>Faça o login para acessar sua conta.</SubTitleContent>
-              </SubTitleSection>
-              <ContentForm>
-                <Label htmlFor="email">
-                  Endereço de email
-                  <Input type="text" id="email" placeholder="@mail.com" />
-                </Label>
-                <Label htmlFor="password">
-                  Senha
-                  <Input type="text" id="password" placeholder="senha" />
-                </Label>
-                <ForgotPasswordContainer>
-                  <label htmlFor="forgot-password">
-                    <input type="checkbox" id="forgot-password" />
-                    Lembrar minha senha
-                  </label>
-                  <p>
-                    Esqueceu a senha?
-                  </p>
-                </ForgotPasswordContainer>
-                <Button type="button">Entrar </Button>
-                <p>
-                  Ainda não possui conta? Criar Conta
-                </p>
-              </ContentForm>
-            </div>
-          </FormSection>
+          <LoginForm />
         </Wrapper>
       </PanelForm>
       <ColumnImg>
