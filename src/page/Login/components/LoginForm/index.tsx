@@ -1,29 +1,27 @@
 import React from 'react';
-import {
-  FormSection,
-  TitleContent, SubTitleContent, SubTitleSection, Label, Input, ForgotPasswordContainer, Button,
-  ContentForm,
-} from './styles';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import * as S from './styles';
 
 const LoginForm: React.FC = () => (
-  <FormSection>
+  <S.FormSection>
     <div>
-      <TitleContent>
+      <S.TitleContent>
         Bem-vindo à AutoLuby
-      </TitleContent>
-      <SubTitleSection>
-        <SubTitleContent>Faça o login para acessar sua conta.</SubTitleContent>
-      </SubTitleSection>
-      <ContentForm>
-        <Label htmlFor="email">
+      </S.TitleContent>
+      <S.SubTitleSection>
+        <S.SubTitleContent>Faça o login para acessar sua conta.</S.SubTitleContent>
+      </S.SubTitleSection>
+      <S.ContentForm>
+        <S.Label htmlFor="email">
           Endereço de email
-          <Input type="text" id="email" placeholder="@mail.com" />
-        </Label>
-        <Label htmlFor="password">
+          <S.Input type="text" id="email" placeholder="@mail.com" />
+        </S.Label>
+        <S.Label htmlFor="password">
           Senha
-          <Input type="text" id="password" placeholder="senha" />
-        </Label>
-        <ForgotPasswordContainer>
+          <S.Input type="text" id="password" placeholder="senha" />
+        </S.Label>
+        <S.ForgotPasswordContainer>
           <label htmlFor="forgot-password">
             <input type="checkbox" id="forgot-password" />
             Lembrar minha senha
@@ -31,14 +29,14 @@ const LoginForm: React.FC = () => (
           <p>
             Esqueceu a senha?
           </p>
-        </ForgotPasswordContainer>
-        <Button type="button">Entrar </Button>
+        </S.ForgotPasswordContainer>
+        <S.Button type="button">Entrar </S.Button>
         <p>
           Ainda não possui conta? Criar Conta
         </p>
-      </ContentForm>
+      </S.ContentForm>
     </div>
-  </FormSection>
+  </S.FormSection>
 );
 
 export default LoginForm;
