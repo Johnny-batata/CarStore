@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Redirect } from 'react-router-dom';
 import * as S from './styles';
+import { loginUser } from '../../../api';
 
 interface IError {
   email?: string;
@@ -13,15 +15,22 @@ const LoginForm: React.FC = () => {
   const [formValues, setFormValues] = useState(intialValues);
   const [formErrors, setFormErrors] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [redirect, setRedirect] = useState<boolean>(false);
 
-  const submitForm = (): void => {
+  const submitForm = async (): Promise<any> => {
     console.log(formValues);
+
+    const data = await loginUser(formValues);
+    // if (data) {
+    localStorage.setItem('token', data.token);
+    console.log(data, 'submitform');
+    return setRedirect(true);
+    // }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
 
-    console.log('name', name, 'value', value);
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -96,6 +105,7 @@ const LoginForm: React.FC = () => {
           </p>
         </S.ContentForm>
       </div>
+      { redirect && <Redirect to="/home" />}
     </S.FormSection>
   );
 };

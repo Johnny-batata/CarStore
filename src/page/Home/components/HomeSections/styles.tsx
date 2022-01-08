@@ -10,6 +10,12 @@ export const ContentSection = styled.section`
   width: 100%;
   margin-bottom: 20px;
   margin-top: 20px;
+  height: 230px;
+  /* height: 280px; */
+  /* width: 250px; */
+  /* max-width: 300px; */
+  /* min-width: 175px; */
+
 `;
 
 export const ContentSectionWrapper = styled.section`

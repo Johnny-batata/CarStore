@@ -10,7 +10,7 @@ export const Container = styled.div`
   display: flex;
   height: 100%;
   width: 100%;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   flex-direction: column;
 `;
 
