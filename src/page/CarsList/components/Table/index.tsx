@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
-  Thead, Ttable, Th, TableWrapper, TableSectionHeader, TableSectionTitle,
+  Thead, Ttable, Th, TableWrapper, TableSectionHeader, TableSectionTitle, Wrapper, Title,
 } from './styles';
 
 interface IArr {
@@ -24,10 +25,38 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   const carHeader = ['ID', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'];
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [buttonsQuantity, setButtonsQuantity] = useState<number>(0);
-  const [offset, setOffset] = useState<number>(1);
+  const [offsetNumber, setOffsetNumber] = useState<number>(1);
+  const [skipLimit, setSkipLimit] = useState<number>(7);
 
+  const location = useLocation();
+
+  const initialPageConfig: any = {
+    all: {
+      title: 'Todos Veículos',
+      subtitle: 'Listagem geral de veículos',
+      skipLimit: 7,
+    },
+    unavailable: {
+      title: 'Seus Veículos',
+      subtitle: 'Listagem de veículos reservados e vendidos',
+      skipLimit: 7,
+
+    },
+    employees: {
+      title: 'Funcionários',
+      subtitle: 'Listagem de funcionários da empresa',
+      skipLimit: 5,
+    },
+  };
+
+  const path = location.pathname.split('/', 3);
   useEffect(() => {
-    setButtonsQuantity(Math.floor(arr.length / 7));
+    setButtonsQuantity(Math.floor(arr.length / skipLimit));
+    if (path[path.length - 1] === 'employees') {
+      setSkipLimit(5);
+      console.log('entrei');
+    }
+    console.log(location.pathname, 'location', path, path[path.length - 1], initialPageConfig[path[path.length - 1]]);
   }, []);
 
   const renderHeader = (array: any): JSX.Element => (
@@ -41,6 +70,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   const renderButtons = (off:number): any => {
     const buttons = [];
     for (let i = off; i <= off + 2; i += 1) {
+      console.log('off', off);
       buttons.push(
         // eslint-disable-next-line jsx-a11y/control-has-associated-label
         <button type="button" value={i} onClick={() => setCurrentPage(i)}>
@@ -54,11 +84,11 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   };
 
   const renderTableBody = (): JSX.Element => {
-    const last = currentPage * 7;
-    const initial = last - 7;
+    const last = currentPage * skipLimit;
+    const initial = last - skipLimit;
+    console.log('last', last, currentPage, skipLimit);
 
     const data = arr.slice(initial, last);
-    console.log(initial, 'current stage', last, data, 'offset', offset);
 
     return data.map((el:IArr) => (
       <tr key={el.id}>
@@ -78,37 +108,41 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   const handleTablePagination = (signal : string):void => {
     if (signal === '-') {
       setCurrentPage(currentPage - 3);
-      console.log('sinal de menos');
-      return setOffset(offset - 3);
+      return setOffsetNumber(offsetNumber - 3);
     }
-    console.log('sinal de mais');
-
     setCurrentPage(currentPage + 3);
-    return setOffset(offset + 3);
+    return setOffsetNumber(offsetNumber + 3);
   };
 
   return (
-    <TableWrapper>
-      <TableSectionHeader>
-        <TableSectionTitle>Listagem geral de veículos</TableSectionTitle>
-        <section>
-          <div>
-            <button type="button" disabled={currentPage - 3 < 0} onClick={() => handleTablePagination('-')}>Anterior </button>
-            {renderButtons(offset)}
-            <button type="button" disabled={currentPage + 3 > buttonsQuantity} onClick={() => handleTablePagination('+')}>Próxima </button>
-            <input type="text" />
-          </div>
-        </section>
-      </TableSectionHeader>
-      <Ttable>
-        <Thead>
-          { renderHeader(carHeader)}
-        </Thead>
-        <tbody>
-          {renderTableBody() }
-        </tbody>
-      </Ttable>
-    </TableWrapper>
+    <Wrapper>
+      <Title>{initialPageConfig[path[path.length - 1]].title}</Title>
+      {/* <Title>sapin</Title> */}
+      <TableWrapper>
+        <TableSectionHeader>
+          <TableSectionTitle>
+            {initialPageConfig[path[path.length - 1]].subtitle}
+            {' '}
+          </TableSectionTitle>
+          <section>
+            <div>
+              <button type="button" disabled={currentPage - 3 < 0} onClick={() => handleTablePagination('-')}>Anterior </button>
+              {renderButtons(offsetNumber)}
+              <button type="button" disabled={currentPage + 3 > buttonsQuantity} onClick={() => handleTablePagination('+')}>Próxima </button>
+              <input type="text" />
+            </div>
+          </section>
+        </TableSectionHeader>
+        <Ttable>
+          <Thead>
+            { renderHeader(carHeader)}
+          </Thead>
+          <tbody>
+            {renderTableBody() }
+          </tbody>
+        </Ttable>
+      </TableWrapper>
+    </Wrapper>
 
   );
 };

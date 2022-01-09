@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../GeneralComponents/Header';
 import {
-  Container, Wrapper, Title,
+  Container,
 } from './styles';
 import { useFetch } from './useFetch';
 
@@ -13,12 +13,9 @@ const CarList: React.FC = () => {
   return (
     <Container>
       <Header />
-      <Wrapper>
-        <Title>Todos Veículos</Title>
 
-        { data && <Table arr={data} /> }
+      { data && <Table arr={data} /> }
 
-      </Wrapper>
     </Container>
   );
 };

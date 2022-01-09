@@ -7,7 +7,9 @@ import CarList from './page/CarsList';
 
 const App: React.FC = () => (
   <Container>
-    <Route exact path="/carslist" component={CarList} />
+    <Route exact path="/employees" component={CarList} />
+    <Route exact path="/cars/unavailable" component={CarList} />
+    <Route exact path="/cars/all" component={CarList} />
     <Route exact path="/home" component={Home} />
     <Route exact path="/" component={Login} />
   </Container>
