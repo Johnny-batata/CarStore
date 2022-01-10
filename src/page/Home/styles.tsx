@@ -4,6 +4,8 @@ export const Wrapper = styled.div`
   padding-left: 29.1666666667%;
   padding-right: 29.1666666667%;
   height: 100%;
+  margin-bottom: 65px
+;
 `;
 
 export const Container = styled.div`

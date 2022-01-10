@@ -23,7 +23,8 @@ export const ContentSection = styled.section`
 
 export const ContentSectionWrapper = styled.section`
     padding-top: 3.75%;
-    padding-bottom: 3.75%;
+    /* padding-bottom: 3.75%; */
+    padding-bottom:20px;
     padding-left: 3.75%;
     padding-right: 3.75%;
     display: flex;
