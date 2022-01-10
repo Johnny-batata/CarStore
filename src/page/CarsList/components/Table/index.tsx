@@ -18,11 +18,10 @@ interface IArr {
 }
 
 interface IElements {
-  arr: IArr[]
+  arr: any[]
 }
 
 const Table: React.FC<IElements> = ({ arr } :any) => {
-  const carHeader = ['ID', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'];
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [buttonsQuantity, setButtonsQuantity] = useState<number>(0);
   const [offsetNumber, setOffsetNumber] = useState<number>(1);
@@ -35,17 +34,19 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
       title: 'Todos Veículos',
       subtitle: 'Listagem geral de veículos',
       skipLimit: 7,
+      tableHeader: ['ID', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
     },
     unavailable: {
       title: 'Seus Veículos',
       subtitle: 'Listagem de veículos reservados e vendidos',
       skipLimit: 7,
-
+      tableHeader: ['ID', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
     },
     employees: {
       title: 'Funcionários',
       subtitle: 'Listagem de funcionários da empresa',
       skipLimit: 5,
+      tableHeader: ['ID', 'NOME', 'EMAIL', 'CPF', 'VALOR', 'BIO'],
     },
   };
 
@@ -56,7 +57,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
       setSkipLimit(5);
       console.log('entrei');
     }
-    console.log(location.pathname, 'location', path, path[path.length - 1], initialPageConfig[path[path.length - 1]]);
+    console.log(location.pathname, 'location', path, path[path.length - 1], arr);
   }, []);
 
   const renderHeader = (array: any): JSX.Element => (
@@ -70,7 +71,6 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   const renderButtons = (off:number): any => {
     const buttons = [];
     for (let i = off; i <= off + 2; i += 1) {
-      console.log('off', off);
       buttons.push(
         // eslint-disable-next-line jsx-a11y/control-has-associated-label
         <button type="button" value={i} onClick={() => setCurrentPage(i)}>
@@ -90,18 +90,15 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
 
     const data = arr.slice(initial, last);
 
-    return data.map((el:IArr) => (
+    return data.map((el:any) => (
       <tr key={el.id}>
-        <td>{el.id}</td>
-        <td>{el.marca}</td>
-        <td>{el.modelo}</td>
-        <td>{el.ano}</td>
-        <td>{el.km}</td>
-        <td>{el.cor}</td>
-        <td>{el.status}</td>
-        <td>{el.chassi}</td>
-        <td>{el.valor}</td>
+        {
+          initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => (
+            <td>{el[e.toLowerCase()]}</td>
+          ))
+        }
       </tr>
+
     ));
   };
 
@@ -117,7 +114,6 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   return (
     <Wrapper>
       <Title>{initialPageConfig[path[path.length - 1]].title}</Title>
-      {/* <Title>sapin</Title> */}
       <TableWrapper>
         <TableSectionHeader>
           <TableSectionTitle>
@@ -135,7 +131,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
         </TableSectionHeader>
         <Ttable>
           <Thead>
-            { renderHeader(carHeader)}
+            { renderHeader(initialPageConfig[path[path.length - 1]].tableHeader)}
           </Thead>
           <tbody>
             {renderTableBody() }

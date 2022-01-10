@@ -44,8 +44,8 @@ const LoginForm: React.FC = () => {
     }
     if (!values.password) {
       errors.password = 'O campo não pode ser vazio.';
-    } else if (values.password.length < 6) {
-      errors.password = 'A senha precisa de pelo menos 6 caracteres';
+    } else if (values.password.length < 5) {
+      errors.password = 'A senha precisa de pelo menos 5 caracteres';
     }
     return errors;
   };
