@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import ImageOne from '../../../../assets/Home/car1.png';
 import ImageTwo from '../../../../assets/Home/car2.png';
@@ -17,6 +18,7 @@ const data = [
     footer: '147 Veículos',
     image: ImageOne,
     alt: 'image-one',
+    link: '/cars/unavailable',
   },
   {
     id: 2,
@@ -25,6 +27,8 @@ const data = [
     footer: '180 Veículos',
     image: ImageTwo,
     alt: 'image-two',
+    link: '/cars/all',
+
   },
   {
     id: 3,
@@ -33,6 +37,8 @@ const data = [
     footer: '147 funcionários',
     image: ImageThree,
     alt: 'image-two',
+    link: '/employees',
+
   },
 ];
 
@@ -43,23 +49,26 @@ interface IElement {
   image: string,
   alt: string,
   id: number,
+  link: string
 }
 
 const renderSection = (array:any): JSX.Element => array.map((
   el:IElement,
 ) => (
-  <ContentSection key={el.id}>
-    <ContentSectionWrapper>
-      <ContentSectionTitle>
-        {el.title}
-      </ContentSectionTitle>
-      <ContentSectionSubTitle>
-        {el.subtitle}
-      </ContentSectionSubTitle>
-      <ContentSectionFooter>{el.footer}</ContentSectionFooter>
-    </ContentSectionWrapper>
-    <ContentSectionImg src={el.image} alt={el.alt} />
-  </ContentSection>
+  <Link to={el.link}>
+    <ContentSection key={el.id}>
+      <ContentSectionWrapper>
+        <ContentSectionTitle>
+          {el.title}
+        </ContentSectionTitle>
+        <ContentSectionSubTitle>
+          {el.subtitle}
+        </ContentSectionSubTitle>
+        <ContentSectionFooter>{el.footer}</ContentSectionFooter>
+      </ContentSectionWrapper>
+      <ContentSectionImg src={el.image} alt={el.alt} />
+    </ContentSection>
+  </Link>
 ));
 
 const HomeSections: React.FC = () => (
