@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  Thead, Ttable, Th, TableWrapper, TableSectionHeader, TableSectionTitle, Wrapper, Title,
+  Thead, Ttable, Th, TableWrapper, TableSectionHeader, TableSectionTitle, Wrapper, Title, Td,
 } from './styles';
 
 interface IArr {
@@ -35,6 +35,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
       subtitle: 'Listagem geral de veículos',
       skipLimit: 7,
       tableHeader: ['ID', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
+
     },
     unavailable: {
       title: 'Seus Veículos',
@@ -55,9 +56,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
     setButtonsQuantity(Math.floor(arr.length / skipLimit));
     if (path[path.length - 1] === 'employees') {
       setSkipLimit(5);
-      console.log('entrei');
     }
-    console.log(location.pathname, 'location', path, path[path.length - 1], arr);
   }, []);
 
   const renderHeader = (array: any): JSX.Element => (
@@ -86,19 +85,30 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
   const renderTableBody = (): JSX.Element => {
     const last = currentPage * skipLimit;
     const initial = last - skipLimit;
-    console.log('last', last, currentPage, skipLimit);
-
     const data = arr.slice(initial, last);
 
     return data.map((el:any) => (
       <tr key={el.id}>
         {
-          initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => (
-            <td>{el[e.toLowerCase()]}</td>
-          ))
+          initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => {
+            const status: any = {
+              Vendido: { color: '#F54A48', theme: 'rgba(245, 74, 72, 0.2)' },
+              Reservado: { color: '#FAC12F', theme: 'rgba(250, 193, 47, 0.2)' },
+              Disponível: { color: '#34C38F', theme: 'rgba(52, 195, 143, 0.2)' },
+            };
+            const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
+            const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
+            return (
+              <Td
+                color={color}
+                theme={theme}
+              >
+                { el[e.toLowerCase()] }
+              </Td>
+            );
+          })
         }
       </tr>
-
     ));
   };
 

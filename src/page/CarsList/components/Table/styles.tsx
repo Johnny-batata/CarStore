@@ -73,3 +73,9 @@ export const Title = styled.h1`
   margin-top: 45px;
   margin-bottom: 40px;
 `;
+
+export const Td = styled.td`
+  color: ${(props) => props.color || '#495057'};
+  background-color: ${(props) => props.theme || '#FFFFFF'};
+
+`;
