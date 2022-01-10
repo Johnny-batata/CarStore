@@ -54,22 +54,26 @@ interface IElement {
 
 const renderSection = (array:any): JSX.Element => array.map((
   el:IElement,
-) => (
-  <Link to={el.link}>
-    <ContentSection key={el.id}>
-      <ContentSectionWrapper>
-        <ContentSectionTitle>
-          {el.title}
-        </ContentSectionTitle>
-        <ContentSectionSubTitle>
-          {el.subtitle}
-        </ContentSectionSubTitle>
-        <ContentSectionFooter>{el.footer}</ContentSectionFooter>
-      </ContentSectionWrapper>
-      <ContentSectionImg src={el.image} alt={el.alt} />
-    </ContentSection>
-  </Link>
-));
+) => {
+  console.log('ek', el);
+  return (
+    <Link to={el.link} key={el.id}>
+      <ContentSection>
+        <ContentSectionWrapper>
+          <ContentSectionTitle>
+            {el.title}
+          </ContentSectionTitle>
+          <ContentSectionSubTitle>
+            {el.subtitle}
+          </ContentSectionSubTitle>
+          <ContentSectionFooter>{el.footer}</ContentSectionFooter>
+        </ContentSectionWrapper>
+        <ContentSectionImg src={el.image} alt={el.alt} />
+      </ContentSection>
+    </Link>
+
+  );
+});
 
 const HomeSections: React.FC = () => (
   renderSection(data)
