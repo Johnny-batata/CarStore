@@ -16,7 +16,7 @@ const handleAxios = (bool?:boolean):any => {
 };
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://johnny-carstore.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
     Authorization: token as string,

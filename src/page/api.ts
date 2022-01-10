@@ -1,5 +1,5 @@
 const loginUser = async (user: any): Promise<any> => {
-  const endpoint = 'http://localhost:3001/login';
+  const endpoint = 'https://johnny-carstore.herokuapp.com/login';
   console.log('user', user, JSON.stringify({ ...user }));
   const responses = fetch(endpoint, {
     method: 'POST',
