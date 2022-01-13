@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {
-  Thead, Ttable, Th, TableWrapper, TableSectionHeader, TableSectionTitle, Wrapper, Title, Td,
+  Thead, Ttable, Th, TableWrapper, TableSectionHeader, TableSectionTitle, Wrapper, Title, TdDiv,
 } from './styles';
 
 interface IArr {
@@ -41,7 +41,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
       title: 'Seus Veículos',
       subtitle: 'Listagem de veículos reservados e vendidos',
       skipLimit: 7,
-      tableHeader: ['ID', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
+      tableHeader: ['MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
     },
     employees: {
       title: 'Funcionários',
@@ -99,12 +99,15 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
             const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
             const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
             return (
-              <Td
-                color={color}
-                theme={theme}
-              >
-                { el[e.toLowerCase()] }
-              </Td>
+              <td data-title={e}>
+                <TdDiv
+                  color={color}
+                  theme={theme}
+                  className="title"
+                >
+                  { el[e.toLowerCase()] }
+                </TdDiv>
+              </td>
             );
           })
         }

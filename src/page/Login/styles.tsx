@@ -8,15 +8,19 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding-top: 4.21875%;
-  padding-left: 7.8125%;
-  padding-bottom: 4.21875%;
+  margin-top: 4.21875%;
+  /* padding-top: 4.21875%; */
+  margin-left: 7.8125%;
+  /* padding-left: 7.8125%; */
+  margin-bottom: 4.21875%;
+  /* padding-bottom: 4.21875%; */
   height: calc(100% - 4.21875%);
   width: calc(100% - 7.8125%);`;
 
 export const ColumnImg = styled.div`
   width: 50%;
-  height: 100%;
+  /* height: 100%; */
+  height: auto;
 `;
 
 export const PanelForm = styled.div`
