@@ -10,6 +10,13 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   padding-left:7.8125%;
   padding-right:7.8125%;
+
+  @media (max-width: 760px) { 
+    #searchBar, #btn-exit {
+        display: none;
+      }
+      justify-content: center;
+  }
 `;
 
 export const LogoImg = styled.img`

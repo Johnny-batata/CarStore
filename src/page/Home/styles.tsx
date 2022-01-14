@@ -14,7 +14,6 @@ export const Container = styled.div`
   width: 100%;
   /* overflow-y: hidden; */
   flex-direction: column;
-  height: max-content;
 `;
 
 export const Title = styled.h1`

@@ -16,6 +16,7 @@ export const Ttable = styled.table`
 
 export const Th = styled.th`
   padding: 0;
+  font-size:12px;
 `;
 
 export const TableWrapper = styled.section`
@@ -29,6 +30,8 @@ export const TableWrapper = styled.section`
   box-sizing: border-box;
   box-shadow: 0px 0px 6px rgba(162, 162, 162, 0.25);
   border-radius: 3px;
+  overflow-x: auto;
+    scroll-behavior: smooth;
 `;
 
 export const TableSectionHeader = styled.section`
@@ -49,15 +52,40 @@ export const TableSectionTitle = styled.section`
   color: #495057;
 `;
 
+export const TdDiv = styled.div`
+  color: ${(props) => props.color || '#495057'};
+  background-color: ${(props) => props.theme || '#FFFFFF'};
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  margin: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  /* font-size: 0.8rem; */
+`;
+
 export const Wrapper = styled.div`
     margin-left: 7.8125%;
     margin-right: 7.8125%;
-    /* margin-left: 40px; */
-    /* margin-right: 40px; */
-
-  
-    height: calc(100% - 9.1796875% - 45px - 40px);
+    /* height: calc(100% - 9.1796875% - 45px - 40px); */
     margin-bottom: 9.1796875%;
+
+    @media (max-width: 1059px) {
+      ${TdDiv} {
+        font-size: 13px;
+        /* width: calc(50% - 15px) */
+        /* width: 30px; */
+        width: 50px;
+      }
+      ${Th} {
+        /* font-size: 10px; */
+        width: 50px;
+        /* width: calc(50% - 15px) */
+      }
+
+    }
 
     @media (max-width: 760px) {
       thead {
@@ -66,12 +94,11 @@ export const Wrapper = styled.div`
       td {
         display: flex;
         align-items: center;
-        /* justify-content: center */
-        /* align-items: center; */
-        /* width:100%; */
       }
       tr {
         display: block;
+        box-shadow: 0px 0px 6px;
+        padding-bottom: 22px;
       }
 
       table td::before {
@@ -90,12 +117,9 @@ export const Wrapper = styled.div`
         margin-bottom: 12px;
         text-align: center;
         color: black;
-}
+      }
       }
     }
-
-
-
     `;
 
 export const Title = styled.h1`
@@ -108,21 +132,4 @@ export const Title = styled.h1`
   color: #495057;
   margin-top: 45px;
   margin-bottom: 40px;
-`;
-
-export const TdDiv = styled.div`
-  color: ${(props) => props.color || '#495057'};
-  background-color: ${(props) => props.theme || '#FFFFFF'};
-  /* height: 50px; */
-font-weight: 500;
-font-size: 16px;
-  text-align: center;
-  margin: 30px;
-  align-items: center;
-    display: flex;
-    justify-content: center;
-    /* padding-top: 5px; */
-    /* padding-bottom: 5px; */
-    /* padding-bottom: 5px; */
-    padding: 5px;
 `;

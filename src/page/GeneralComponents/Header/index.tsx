@@ -16,7 +16,7 @@ const Header: React.FC = () => (
 
     <Input type="text" id="searchBar" />
     <Link to="/">
-      <Button type="button" onClick={() => localStorage.clear()}>Sair</Button>
+      <Button type="button" id="btn-exit" onClick={() => localStorage.clear()}>Sair</Button>
     </Link>
 
   </HeaderContainer>
