@@ -46,7 +46,7 @@ export const ContentSectionFooter = styled.h3`
     letter-spacing: -0.02em;
     text-transform: uppercase;
     color: #F54A48;
-    background-color: aqua;
+    /* background-color: aqua; */
     height: 100%;
     align-items: center;
     /* margin-top: 43px; */
