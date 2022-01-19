@@ -50,7 +50,6 @@ export const ContentSectionFooter = styled.h3`
     height: 100%;
     align-items: center;
     /* margin-top: 43px; */
-    /* margin-top: 43px; */
     justify-content: flex-end;
     display: flex;
 
