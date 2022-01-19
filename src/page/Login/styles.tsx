@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  display: flex;
-  height: 100%;
-  width: 100%;
-  overflow-y: hidden;
-`;
-
 export const Wrapper = styled.div`
   margin-top: 4.21875%;
   /* padding-top: 4.21875%; */
@@ -21,11 +14,16 @@ export const ColumnImg = styled.div`
   width: 50%;
   /* height: 100%; */
   height: auto;
+
 `;
 
 export const PanelForm = styled.div`
   width: 50%;
+  /* min-width: 800px; */
+  min-width: 510px;
   height: calc(100% - 4.21875%);
+
+
 `;
 
 export const Title = styled.h1`
@@ -45,10 +43,39 @@ export const LogoImg = styled.img`
   width: 28.5px;
   height: 35.19px;
   margin-right: 3.02083333333%;
+
+
 `;
 
 export const LogoSection = styled.section`
   display: flex;
   align-items: center;
   height: 57px;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  @media (max-width: 1080px) {
+    ${ColumnImg} {
+      display:none;
+      width: 0;
+    }
+    ${PanelForm} {
+      width: 100%;
+    }
+  }
+  @media (max-width: 500px) {
+    ${ColumnImg} {
+      display:none;
+      width: 0;
+    }
+    ${PanelForm} {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
 `;

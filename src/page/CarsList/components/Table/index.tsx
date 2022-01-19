@@ -163,62 +163,6 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
     }
   }, []);
 
-  const renderHeader = (array: any): JSX.Element => (
-    array.map((el: string) => (
-      <Th key={el}>
-        {el}
-      </Th>
-    ))
-  );
-
-  const renderButtons = (off:number): any => {
-    const buttons = [];
-    for (let i = off; i <= off + 2; i += 1) {
-      buttons.push(
-        // eslint-disable-next-line jsx-a11y/control-has-associated-label
-        <button type="button" value={i} onClick={() => setCurrentPage(i)}>
-          {' '}
-          {i}
-          {' '}
-        </button>,
-      );
-    }
-    return buttons;
-  };
-
-  // const renderTableBody = (): JSX.Element => {
-  //   const last = currentPage * skipLimit;
-  //   const initial = last - skipLimit;
-  //   const data = arr.slice(initial, last);
-
-  //   return data.map((el:any) => (
-  //     <tr key={el.id}>
-  //       {
-  //         initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => {
-  //           const status: any = {
-  //             Vendido: { color: '#F54A48', theme: 'rgba(245, 74, 72, 0.2)' },
-  //             Reservado: { color: '#FAC12F', theme: 'rgba(250, 193, 47, 0.2)' },
-  //             Disponível: { color: '#34C38F', theme: 'rgba(52, 195, 143, 0.2)' },
-  //           };
-  //     const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
-  //     const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
-  //           return (
-  //             <td data-title={e}>
-  //               <TdDiv
-  //                 color={color}
-  //                 theme={theme}
-  //                 className="title"
-  //               >
-  //                 { el[e.toLowerCase()] }
-  //               </TdDiv>
-  //             </td>
-  //           );
-  //         })
-  //       }
-  //     </tr>
-  //   ));
-  // };
-
   const requestSearch = (searchValue: string): any => {
     setSearchText(searchValue);
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
@@ -228,28 +172,28 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
     // setRows(filteredRows);
   };
 
-  // const rows = arr.map((el:any) => (
-  //   initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => {
-  //     const status: any = {
-  //       Vendido: { color: '#F54A48', theme: 'rgba(245, 74, 72, 0.2)' },
-  //       Reservado: { color: '#FAC12F', theme: 'rgba(250, 193, 47, 0.2)' },
-  //       Disponível: { color: '#34C38F', theme: 'rgba(52, 195, 143, 0.2)' },
-  //     };
-  //     const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
-  //     const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
-  //     return (
-  //       <td data-title={e}>
-  //         <TdDiv
-  //           color={color}
-  //           theme={theme}
-  //           className="title"
-  //         >
-  //           { el[e.toLowerCase()] }
-  //         </TdDiv>
-  //       </td>
-  //     );
-  //   })
-  // ));
+  const rows = arr.map((el:any) => (
+    initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => {
+      const status: any = {
+        Vendido: { color: '#F54A48', theme: 'rgba(245, 74, 72, 0.2)' },
+        Reservado: { color: '#FAC12F', theme: 'rgba(250, 193, 47, 0.2)' },
+        Disponível: { color: '#34C38F', theme: 'rgba(52, 195, 143, 0.2)' },
+      };
+      const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
+      const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
+      return (
+        <td data-title={e}>
+          <TdDiv
+            color={color}
+            theme={theme}
+            className="title"
+          >
+            { el[e.toLowerCase()] }
+          </TdDiv>
+        </td>
+      );
+    })
+  ));
 
   // React.useEffect(() => {
   //   setRows(arr);
@@ -273,6 +217,7 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
           <DataGrid
             components={{ Toolbar: QuickSearchToolbar }}
             rows={rowElementsObject()}
+            // rows={rows}
             getRowId={(row) => row.id}
             sortingOrder={['desc', 'asc']}
             sortModel={sortModel}

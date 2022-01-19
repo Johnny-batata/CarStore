@@ -10,12 +10,35 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
   padding-left:7.8125%;
   padding-right:7.8125%;
+  #mobile-menu {
+    display: none;
+  }
 
   @media (max-width: 760px) { 
     #searchBar, #btn-exit {
         display: none;
       }
+    #mobile-menu {
+      display: flex;
       justify-content: center;
+    }
+    #home-id {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    #composition-button {
+      background-color: white;
+      border-color: white;
+      color: black;
+      width: 60px; 
+      height: auto;
+      box-shadow: none;
+      padding: 0;
+    }
+    #mobile-menu-btn {
+      font-size: 38px;
+    }
   }
 `;
 

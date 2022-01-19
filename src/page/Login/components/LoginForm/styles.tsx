@@ -2,12 +2,8 @@ import styled from 'styled-components';
 
 export const FormSection = styled.section`
   margin-top: 17.3828125%;
-  /* padding-top: 17.3828125%; */
   margin-left: 5.67708333333%;
-  /* padding-left: 5.67708333333%; */
   margin-right: calc(7.8125% + 5.67708333333%);
-  /* padding-right: calc(7.8125% + 5.67708333333%); */
-  /* padding-bottom: 17.3828125%; */
   margin-bottom: 17.3828125%;
   display: flex;
   align-items: center;

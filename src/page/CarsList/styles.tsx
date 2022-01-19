@@ -5,6 +5,8 @@ export const Container = styled.div`
   /* position: absolute; */
   /* height: max-content; */
   height: 100%;
+  height: max-content;
+
   /* width: max-content; */
 
 `;

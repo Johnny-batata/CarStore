@@ -36,7 +36,6 @@ const CarList: React.FC = () => {
     <Container>
       <Header />
       { data && <Table arr={data} /> }
-
     </Container>
   );
 };

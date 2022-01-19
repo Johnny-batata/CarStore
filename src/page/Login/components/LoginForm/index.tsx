@@ -23,7 +23,6 @@ const LoginForm: React.FC = () => {
     const data = await loginUser(formValues);
     // if (data) {
     localStorage.setItem('token', data.token);
-    console.log(data, 'submitform');
     return setRedirect(true);
     // }
   };

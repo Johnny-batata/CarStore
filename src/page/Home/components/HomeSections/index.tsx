@@ -76,7 +76,13 @@ const renderSection = (array:any): JSX.Element => array.map((
 });
 
 const HomeSections: React.FC = () => (
-  renderSection(data)
+  <div>
+    { renderSection(data) }
+    {/* <p>
+      pato
+    </p> */}
+  </div>
+
 );
 
 export default HomeSections;
