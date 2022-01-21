@@ -100,11 +100,6 @@ function QuickSearchToolbar(props: QuickSearchToolbarProps): any {
 }
 
 const Table: React.FC<IElements> = ({ arr } :any) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [buttonsQuantity, setButtonsQuantity] = useState<number>(0);
-  const [offsetNumber, setOffsetNumber] = useState<number>(1);
-  const [skipLimit, setSkipLimit] = useState<number>(7);
-
   const [sortModel, setSortModel] = React.useState<GridSortModel>([
     {
       field: 'id',
@@ -121,46 +116,47 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
       title: 'Todos Veículos',
       subtitle: 'Listagem geral de veículos',
       skipLimit: 7,
-      tableHeader: ['id', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
+      tableHeader: ['id', 'marca', 'modelo', 'ano', 'km', 'cor', 'status', 'chassi', 'valor'],
 
     },
     unavailable: {
       title: 'Seus Veículos',
       subtitle: 'Listagem de veículos reservados e vendidos',
       skipLimit: 7,
-      tableHeader: ['id', 'MARCA', 'MODELO', 'ANO', 'KM', 'COR', 'STATUS', 'CHASSI', 'VALOR'],
+      tableHeader: ['id', 'marca', 'modelo', 'ano', 'km', 'cor', 'status', 'chassi', 'valor'],
     },
     employees: {
       title: 'Funcionários',
       subtitle: 'Listagem de funcionários da empresa',
       skipLimit: 5,
-      tableHeader: ['id', 'NOME', 'EMAIL', 'CPF', 'VALOR', 'BIO'],
+      tableHeader: ['id', 'nome', 'email', 'cpf', 'valor', 'bio'],
     },
   };
-  const rowElementsObject = ():any => {
-    const arra: any = [];
 
-    arr.map((el:any, index: number) => {
-      const obj: any = {};
-      initialPageConfig[path[path.length - 1]].tableHeader.forEach((e:any) => {
-        obj[e] = el[e.toLowerCase()];
-      });
-      return arra.push(obj);
-    });
-    return arra;
-  };
   const [pageSize, setPageSize] = React.useState<number>(
     initialPageConfig[path[path.length - 1]].skipLimit,
   );
 
+  const [rows, setRows] = React.useState<any[]>([]);
+  const rowElementsObject = ():any => {
+    const arra: any = [];
+
+    arr.map((el:any) => {
+      const obj: any = {};
+      initialPageConfig[path[path.length - 1]].tableHeader.forEach((e:any) => {
+        // item = obj[e].toUpperCase();
+        obj[e] = el[e.toLowerCase()];
+      });
+      return arra.push(obj);
+    });
+    setRows(arra);
+    return arra;
+  };
+
   const [searchText, setSearchText] = React.useState('');
-  // const [rows, setRows] = React.useState<any[]>(rowElements);
 
   useEffect(() => {
-    setButtonsQuantity(Math.floor(arr.length / skipLimit));
-    if (path[path.length - 1] === 'employees') {
-      setSkipLimit(5);
-    }
+    rowElementsObject();
   }, []);
 
   const requestSearch = (searchValue: string): any => {
@@ -168,41 +164,46 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
     const searchRegex = new RegExp(escapeRegExp(searchValue), 'i');
     const filteredRows = arr
       .filter((row: any) => Object.keys(row).some((field: any) => searchRegex
-        .test(row[field].toString())));
-    // setRows(filteredRows);
+        .test(row[field.toLowerCase()].toString())));
+    setRows(filteredRows);
   };
 
-  const rows = arr.map((el:any) => (
-    initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => {
-      const status: any = {
-        Vendido: { color: '#F54A48', theme: 'rgba(245, 74, 72, 0.2)' },
-        Reservado: { color: '#FAC12F', theme: 'rgba(250, 193, 47, 0.2)' },
-        Disponível: { color: '#34C38F', theme: 'rgba(52, 195, 143, 0.2)' },
-      };
-      const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
-      const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
-      return (
-        <td data-title={e}>
-          <TdDiv
-            color={color}
-            theme={theme}
-            className="title"
-          >
-            { el[e.toLowerCase()] }
-          </TdDiv>
-        </td>
-      );
-    })
-  ));
+  // const rows = arr.map((el:any) => (
+  //   initialPageConfig[path[path.length - 1]].tableHeader.map((e:any) => {
+  //     const status: any = {
+  //       Vendido: { color: '#F54A48', theme: 'rgba(245, 74, 72, 0.2)' },
+  //       Reservado: { color: '#FAC12F', theme: 'rgba(250, 193, 47, 0.2)' },
+  //       Disponível: { color: '#34C38F', theme: 'rgba(52, 195, 143, 0.2)' },
+  //     };
+  //     const color = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].color : '#495057';
+  //     const theme = status[el[e.toLowerCase()]] ? status[el[e.toLowerCase()]].theme : '#FFFFF';
+  //     return (
+  //       <td data-title={e}>
+  //         <TdDiv
+  //           color={color}
+  //           theme={theme}
+  //           className="title"
+  //         >
+  //           { el[e.toLowerCase()] }
+  //         </TdDiv>
+  //       </td>
+  //     );
+  //   })
+  // ));
 
-  // React.useEffect(() => {
-  //   setRows(arr);
-  // }, [arr]);
+  useEffect(() => {
+    setRows(arr);
+    // rowElementsObject();
+  }, [arr]);
 
   const columns = initialPageConfig[path[path.length - 1]].tableHeader
-    .map((el: string) => ({ field: el }));
+    .map((el: string) => {
+      if (initialPageConfig[path[path.length - 1]].title !== 'Funcionários') return { field: el, flex: 1, minWidth: 150 };
+      if (el === 'EMAIL') return { field: el, flex: 0.3, minWidth: 150 };
+      if (el === 'BIO') return { field: el, flex: 1, minWidth: 550 };
+      return { field: el };
+    });
 
-  console.log(initialPageConfig[path[path.length - 1]].skipLimit, 'bah');
   return (
     <Wrapper>
       <Title>{initialPageConfig[path[path.length - 1]].title}</Title>
@@ -212,12 +213,12 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
             {initialPageConfig[path[path.length - 1]].subtitle}
           </TableSectionTitle>
         </TableSectionHeader>
-        { console.log('row elements', rowElementsObject())}
         <Box sx={{ height: 530, width: 1 }}>
+          {console.log(rows, 'rows')}
           <DataGrid
             components={{ Toolbar: QuickSearchToolbar }}
-            rows={rowElementsObject()}
-            // rows={rows}
+            // rows={rowElementsObject()}
+            rows={rows}
             getRowId={(row) => row.id}
             sortingOrder={['desc', 'asc']}
             sortModel={sortModel}
@@ -234,14 +235,6 @@ const Table: React.FC<IElements> = ({ arr } :any) => {
                 clearSearch: () => requestSearch(''),
               },
             }}
-            // sx={{
-            //   boxShadow: 2,
-            //   border: 2,
-            //   borderColor: 'primary.light',
-            //   '& .MuiDataGrid-cell:hover': {
-            //     color: 'primary.main',
-            //   },
-            // }}
           />
         </Box>
       </TableWrapper>
